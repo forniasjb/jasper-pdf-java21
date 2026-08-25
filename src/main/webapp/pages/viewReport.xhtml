@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+>
+    <h:head>
+        <title>Brand Report System</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f4f7f6;
+                padding: 40px 20px;
+            }
+            .center-panel {
+                width: 520px;
+                margin: 0 auto;
+                text-align: center;
+            }
+            .button-container {
+                margin-top: 20px;
+                display: flex;
+                gap: 10px;
+                justify-content: center;
+                align-items: center;
+                flex-wrap: wrap;
+            }
+        </style>
+    </h:head>
+
+    <h:body>
+        <div class="center-panel">
+            <h:form id="reportForm">
+                <p:card>
+                    <f:facet name="title">
+                        Brand Sales Summary (Grouped)
+                    </f:facet>
+
+                    <p>
+                        Click the buttons below to view the Brand Per Grouping
+                        report in your browser or download it as a PDF.
+                    </p>
+
+                    <hr />
+
+                    <div class="button-container">
+                        <!-- View Inline Button -->
+                        <p:commandButton
+                            value="View Report"
+                            icon="pi pi-eye"
+                            ajax="false"
+                            onclick="this.form.target = '_blank'"
+                            action="#{reportBean.viewBrandPerGrouping()}"
+                            styleClass="ui-button-raised ui-button-success"
+                        />
+
+                        <!-- Download PDF Button -->
+                        <p:commandButton
+                            value="Download PDF"
+                            icon="pi pi-download"
+                            ajax="false"
+                            styleClass="ui-button-raised ui-button-help"
+                        >
+                            <p:fileDownload
+                                value="#{reportBean.downloadBrandPerGrouping()}"
+                            />
+                        </p:commandButton>
+                    </div>
+                </p:card>
+            </h:form>
+        </div>
+    </h:body>
+</html>

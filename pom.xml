@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.sandbox.com</groupId>
+    <artifactId>jasper-pdf-java21</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <name>jasper-pdf-java21</name>
+    <packaging>war</packaging>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.target>21</maven.compiler.target>
+        <maven.compiler.source>21</maven.compiler.source>
+        <junit.version>5.9.2</junit.version>
+    </properties>
+
+    <dependencies>
+
+        <!-- ============================================================ -->
+        <!-- Hibernate - Jakarta -->
+        <!-- ============================================================ -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core-jakarta</artifactId>
+            <version>5.6.15.Final</version>
+        </dependency>
+
+        <!-- ============================================================ -->
+        <!-- MariaDB -->
+        <!-- ============================================================ -->
+        <dependency>
+            <groupId>org.mariadb.jdbc</groupId>
+            <artifactId>mariadb-java-client</artifactId>
+            <version>3.5.3</version>
+        </dependency>
+
+        <!-- ============================================================ -->
+        <!-- PrimeFaces -->
+        <!-- ============================================================ -->
+        <dependency>
+            <groupId>org.primefaces</groupId>
+            <artifactId>primefaces</artifactId>
+            <version>10.0.30</version>
+            <classifier>jakarta</classifier>
+        </dependency>
+
+        <!-- ============================================================ -->
+        <!-- PrimeFaces Themes -->
+        <!-- ============================================================ -->
+        <dependency>
+            <groupId>org.primefaces.themes</groupId>
+            <artifactId>all-themes</artifactId>
+            <version>1.0.10</version>
+        </dependency>
+
+        <!-- ============================================================ -->
+        <!-- Jakarta Faces 3.x -->
+        <!-- Compatible with Jakarta EE 9 / Servlet 5 -->
+        <!-- ============================================================ -->
+        <dependency>
+            <groupId>org.glassfish</groupId>
+            <artifactId>jakarta.faces</artifactId>
+            <version>3.0.5</version>
+        </dependency>
+
+        <!-- ============================================================ -->
+        <!-- Jakarta Persistence -->
+        <!-- ============================================================ -->
+        <dependency>
+            <groupId>jakarta.persistence</groupId>
+            <artifactId>jakarta.persistence-api</artifactId>
+            <version>3.0.0</version>
+        </dependency>
+
+        <!-- ============================================================ -->
+        <!-- Jakarta EL -->
+        <!-- ============================================================ -->
+        <dependency>
+            <groupId>jakarta.el</groupId>
+            <artifactId>jakarta.el-api</artifactId>
+            <version>4.0.0</version>
+        </dependency>
+
+
+        <!-- ============================================================ -->
+        <!-- Jakarta Servlet API -->
+        <!-- Provided by Jetty 10 -->
+        <!-- ============================================================ -->
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <version>5.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- ============================================================ -->
+        <!-- CDI API -->
+        <!-- ============================================================ -->
+        <dependency>
+            <groupId>jakarta.enterprise</groupId>
+            <artifactId>jakarta.enterprise.cdi-api</artifactId>
+            <version>3.0.0</version>
+        </dependency>
+
+        <!-- ============================================================ -->
+        <!-- Weld CDI for Jetty -->
+        <!-- ============================================================ -->
+        <dependency>
+            <groupId>org.jboss.weld.servlet</groupId>
+            <artifactId>weld-servlet-core</artifactId>
+            <version>4.0.3.Final</version>
+        </dependency>
+
+        <!-- ============================================================ -->
+        <!-- Apache Commons IO -->
+        <!-- ============================================================ -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.16.1</version>
+        </dependency>
+
+        <!-- ============================================================ -->
+        <!-- JasperReports -->
+        <!-- ============================================================ -->
+        <dependency>
+            <groupId>net.sf.jasperreports</groupId>
+            <artifactId>jasperreports</artifactId>
+            <version>6.21.3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.groovy</groupId>
+            <artifactId>groovy</artifactId>
+            <version>4.0.15</version>
+        </dependency>
+
+        <!-- ============================================================ -->
+        <!-- SLF4J -->
+        <!-- ============================================================ -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>2.0.17</version>
+        </dependency>
+
+        <!-- ============================================================ -->
+        <!-- Logback -->
+        <!-- ============================================================ -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.5.18</version>
+        </dependency>
+
+        <!-- ============================================================ -->
+        <!-- JUnit -->
+        <!-- ============================================================ -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <finalName>jasperDemo</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.3.2</version>
+            </plugin>
+
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>11.0.26</version>
+
+                <configuration>
+                    <httpConnector>
+                        <port>8099</port>
+                    </httpConnector>
+
+                    <webApp>
+                        <contextPath>/jasper-pdf-java21</contextPath>
+                    </webApp>
+
+                    <!-- ===== MIME Type Mappings for Fonts ===== -->
+                    <systemProperties>
+                        <systemProperty>
+                            <name>org.eclipse.jetty.servlet.Default.mimeTypes</name>
+                            <value>
+                                ttf=application/x-font-ttf,woff=application/font-woff,woff2=application/font-woff2,otf=application/x-font-otf,eot=application/vnd.ms-fontobject,svg=image/svg+xml,ico=image/x-icon</value>
+                        </systemProperty>
+                    </systemProperties>
+
+                    <webXml>src/main/webapp/WEB-INF/web.xml</webXml>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

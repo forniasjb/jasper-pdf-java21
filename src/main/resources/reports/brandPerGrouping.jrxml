@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+    name="brandPerGrouping" language="groovy" pageWidth="842" pageHeight="595"
+    orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20"
+    bottomMargin="20" uuid="093712a1-05af-458d-844f-db0f528b16b4">
+    <property name="ireport.zoom" value="1.1000000000000016" />
+    <property name="ireport.x" value="0" />
+    <property name="ireport.y" value="0" />
+    <queryString>
+        <![CDATA[SELECT * FROM Brand ORDER BY Category;]]>
+    </queryString>
+    <field name="brandId" class="java.lang.Integer">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="brandCode" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="brandName" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="category" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="country" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="isActive" class="java.lang.Boolean">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="description" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="createdAt" class="java.sql.Timestamp">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="updatedAt" class="java.sql.Timestamp">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="price" class="java.math.BigDecimal">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <variable name="CategoryTotal" class="java.math.BigDecimal" resetType="Group"
+        resetGroup="CategoryGroup" calculation="Sum">
+        <variableExpression><![CDATA[$F{price}]]></variableExpression>
+    </variable>
+    <variable name="GrandTotal" class="java.math.BigDecimal" calculation="Sum">
+        <variableExpression><![CDATA[$F{price}]]></variableExpression>
+    </variable>
+    <group name="CategoryGroup">
+        <groupExpression><![CDATA[$F{category}]]></groupExpression>
+        <groupHeader>
+            <band height="25">
+                <line>
+                    <reportElement x="0" y="0" width="802" height="1"
+                        uuid="2b444ff3-8d1a-43b2-829d-b307630870e6" />
+                </line>
+                <textField>
+                    <reportElement mode="Opaque" x="0" y="0" width="802" height="25"
+                        forecolor="#000000" backcolor="#FFFFFF"
+                        uuid="f00aee1d-a779-4693-b516-5ff60ed35d92" />
+                    <textElement verticalAlignment="Middle">
+                        <font fontName="Tahoma" size="12" isBold="true" />
+                        <paragraph leftIndent="5" />
+                    </textElement>
+                    <textFieldExpression><![CDATA["CATEGORY: " + $F{category}.toUpperCase()]]></textFieldExpression>
+                </textField>
+            </band>
+        </groupHeader>
+        <groupFooter>
+            <band height="16">
+                <textField>
+                    <reportElement x="530" y="0" width="206" height="16"
+                        uuid="94068269-24f5-439c-8a87-ad3cab0cabd0" />
+                    <textElement>
+                        <font fontName="Tahoma" size="12" isBold="true" />
+                    </textElement>
+                    <textFieldExpression><![CDATA["Total for " + $F{category} + ": "]]></textFieldExpression>
+                </textField>
+                <textField isBlankWhenNull="false">
+                    <reportElement x="736" y="0" width="66" height="16"
+                        uuid="cdb8c1b3-fc58-4750-90ea-8b09084dd2b0" />
+                    <textElement textAlignment="Right">
+                        <font fontName="Tahoma" size="12" isBold="true" />
+                    </textElement>
+                    <textFieldExpression><![CDATA[$V{CategoryTotal}]]></textFieldExpression>
+                </textField>
+            </band>
+        </groupFooter>
+    </group>
+    <background>
+        <band splitType="Stretch" />
+    </background>
+    <title>
+        <band height="5" splitType="Stretch" />
+    </title>
+    <pageHeader>
+        <band height="58" splitType="Stretch">
+            <staticText>
+                <reportElement x="-1" y="0" width="77" height="20"
+                    uuid="3376a12f-e9cf-4fa1-804d-389475f2a938" />
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="12" />
+                </textElement>
+                <text><![CDATA[Report Name:]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="-1" y="20" width="58" height="20"
+                    uuid="439922d2-bad0-4a95-80c9-f98bd81f3fbf" />
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="12" />
+                </textElement>
+                <text><![CDATA[BrandID:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="76" y="20" width="80" height="20"
+                    uuid="fb83a968-61e7-4b0c-b32b-d6b081d607ca" />
+                <textElement textAlignment="Justified" verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="12" />
+                </textElement>
+                <textFieldExpression><![CDATA[$F{brandId}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="76" y="0" width="113" height="20"
+                    uuid="c51efb49-5478-4170-b369-90c15c36af95" />
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="12" />
+                </textElement>
+                <text><![CDATA[Brand Per Grouping]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="-1" y="40" width="46" height="17"
+                    uuid="f4b99cd6-c119-4456-9ecc-12bb04154813" />
+                <textElement textAlignment="Justified" verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="12" />
+                </textElement>
+                <text><![CDATA[Version:]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="76" y="40" width="31" height="17"
+                    uuid="deafb3f9-e95d-4fa4-a114-134f0f94d074" />
+                <textElement verticalAlignment="Top">
+                    <font fontName="Tahoma" size="12" />
+                </textElement>
+                <text><![CDATA[v.1]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="253" y="0" width="298" height="29" backcolor="#0066CC"
+                    uuid="5ff4b119-e210-418f-8f3b-2a754f258fc0" />
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="20" isBold="true" />
+                </textElement>
+                <text><![CDATA[Brand Sales Summary]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="337" y="29" width="133" height="20"
+                    uuid="d2551132-2fe8-46e5-884a-08db2a14b018" />
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="12" isBold="true" />
+                </textElement>
+                <text><![CDATA[Brand Report Computation]]></text>
+            </staticText>
+            <textField pattern="MMMMM dd, yyyy">
+                <reportElement x="712" y="20" width="90" height="20"
+                    uuid="c247e924-9139-4685-8c47-b6fced632569" />
+                <textElement textAlignment="Right" verticalAlignment="Middle" />
+                <textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+            </textField>
+            <textField evaluationTime="Report">
+                <reportElement x="786" y="0" width="16" height="20"
+                    uuid="a9be9d90-3d79-4ded-ac65-d84ae71a6307" />
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font size="10" />
+                </textElement>
+                <textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="726" y="0" width="60" height="20"
+                    uuid="6ed78b12-093f-4fff-ba80-f081202630c1" />
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="10" />
+                </textElement>
+                <textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+"of"]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="712" y="40" width="90" height="17"
+                    uuid="8869542d-fec2-4f76-9ee9-3beb20304dbd" />
+                <textElement textAlignment="Right" verticalAlignment="Middle" />
+                <textFieldExpression><![CDATA[new java.text.SimpleDateFormat("hh:mm a").format(new java.util.Date())]]></textFieldExpression>
+            </textField>
+            <line>
+                <reportElement x="-1" y="57" width="803" height="1"
+                    uuid="bef42096-8168-49dd-9230-ba6cdc91f691" />
+            </line>
+        </band>
+    </pageHeader>
+    <columnHeader>
+        <band height="18" splitType="Stretch">
+            <staticText>
+                <reportElement x="157" y="0" width="95" height="16"
+                    uuid="c1fa7e1d-ada8-44e5-a581-84aec7c80ae3" />
+                <textElement>
+                    <font size="12" />
+                </textElement>
+                <text><![CDATA[Brand Name]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="0" y="0" width="108" height="16"
+                    uuid="938b86c0-5fe7-4841-b1f2-7ce633464945" />
+                <textElement>
+                    <font size="12" />
+                </textElement>
+                <text><![CDATA[Brand Code]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="701" y="0" width="101" height="16"
+                    uuid="7334d26e-f34f-4979-bf4e-4d2762fe20f0" />
+                <textElement textAlignment="Right">
+                    <font size="12" />
+                </textElement>
+                <text><![CDATA[Price]]></text>
+            </staticText>
+        </band>
+    </columnHeader>
+    <detail>
+        <band height="16" splitType="Stretch">
+            <textField>
+                <reportElement x="156" y="0" width="133" height="16"
+                    uuid="a1809c3e-9bc8-4336-95c5-d824cd3a7dd7" />
+                <textElement>
+                    <font size="12" />
+                </textElement>
+                <textFieldExpression><![CDATA[$F{brandName}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="701" y="0" width="101" height="16"
+                    uuid="e71723be-de20-4f3a-928e-e5cfde97fecc" />
+                <textElement textAlignment="Right">
+                    <font size="12" />
+                </textElement>
+                <textFieldExpression><![CDATA[$F{price}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="0" y="0" width="100" height="16"
+                    uuid="a44455e8-2c6d-4c80-acef-a681480313d4" />
+                <textElement>
+                    <font size="12" />
+                </textElement>
+                <textFieldExpression><![CDATA[$F{brandCode}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+    <columnFooter>
+        <band height="52" splitType="Stretch" />
+    </columnFooter>
+    <pageFooter>
+        <band height="21" splitType="Stretch">
+            <textField>
+                <reportElement x="726" y="0" width="76" height="20"
+                    uuid="fe079c61-7dab-474e-a155-31eea24c958b" />
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font size="12" isBold="true" />
+                </textElement>
+                <textFieldExpression><![CDATA[$V{GrandTotal}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="658" y="0" width="68" height="20"
+                    uuid="92f9a67a-f9b3-4120-836d-1327b74adae3" />
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font size="12" isBold="true" />
+                </textElement>
+                <text><![CDATA[Grand Total :]]></text>
+            </staticText>
+        </band>
+    </pageFooter>
+</jasperReport>

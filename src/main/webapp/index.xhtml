@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+>
+    <h:head>
+        <title>Brand Report System</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f4f7f6;
+                padding: 20px;
+            }
+            .center-panel {
+                width: 400px;
+                margin: 0 auto;
+                text-align: center;
+            }
+        </style>
+    </h:head>
+
+    <h:body>
+        <div class="center-panel">
+            <h:form id="reportForm">
+                <p:card>
+                    <f:facet name="title"> JasperReports Export </f:facet>
+
+                    <p>
+                        Click the button below to generate and download the
+                        Brand PDF Report.
+                    </p>
+
+                    <hr />
+
+                    <!-- Important: ajax="false" for fileDownload -->
+                    <p:commandButton
+                        value="Download PDF Report"
+                        icon="pi pi-file-pdf"
+                        ajax="false"
+                        styleClass="ui-button-raised ui-button-primary"
+                    >
+                        <p:fileDownload value="#{reportBean.file}" />
+                    </p:commandButton>
+                </p:card>
+            </h:form>
+        </div>
+    </h:body>
+</html>
