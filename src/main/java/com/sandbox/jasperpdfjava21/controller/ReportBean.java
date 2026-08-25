@@ -31,7 +31,6 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 @ViewScoped
 public class ReportBean implements Serializable {
     private static final long serialVersionUID = 1L;
-
     // Logger initialization
     private static final Logger LOGGER = LoggerFactory.getLogger(ReportBean.class);
 
@@ -46,7 +45,6 @@ public class ReportBean implements Serializable {
             // Fetch data
             List<Brand> brandList = brandDao.findAll();
             JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(brandList);
-
             // Load report template
             InputStream reportStream = ReportBean.class.getClassLoader()
                     .getResourceAsStream("reports/reportBrandDesign.jrxml");
@@ -96,7 +94,6 @@ public class ReportBean implements Serializable {
 
             JasperReport jasperReport = JasperCompileManager.compileReport(reportStream);
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, new HashMap<>(), dataSource);
-
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             JasperExportManager.exportReportToPdfStream(jasperPrint, byteArrayOutputStream);
             byte[] pdfBytes = byteArrayOutputStream.toByteArray();
@@ -109,7 +106,6 @@ public class ReportBean implements Serializable {
             response.setContentType("application/pdf");
             response.setHeader("Content-Disposition", "inline; filename=\"brandPerGrouping.pdf\"");
             response.setContentLength(pdfBytes.length);
-
             response.getOutputStream().write(pdfBytes);
             response.getOutputStream().flush();
 
