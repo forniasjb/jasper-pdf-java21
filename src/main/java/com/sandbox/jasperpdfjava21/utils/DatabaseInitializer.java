@@ -1,4 +1,4 @@
-package com.sandbox.com.jasperpdfjava21.utils;
+package com.sandbox.jasperpdfjava21.utils;
 
 import java.io.BufferedReader;
 import java.io.InputStream;

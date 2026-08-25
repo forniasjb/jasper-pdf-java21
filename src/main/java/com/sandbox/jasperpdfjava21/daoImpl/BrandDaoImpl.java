@@ -1,9 +1,9 @@
-package com.sandbox.com.jasperpdfjava21.daoImpl;
+package com.sandbox.jasperpdfjava21.daoImpl;
 
 import java.util.List;
 
-import com.sandbox.com.jasperpdfjava21.dao.BrandDao;
-import com.sandbox.com.jasperpdfjava21.entity.Brand;
+import com.sandbox.jasperpdfjava21.dao.BrandDao;
+import com.sandbox.jasperpdfjava21.entity.Brand;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;

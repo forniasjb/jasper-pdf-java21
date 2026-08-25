@@ -1,4 +1,4 @@
-package com.sandbox.com.jasperpdfjava21.entity;
+package com.sandbox.jasperpdfjava21.entity;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

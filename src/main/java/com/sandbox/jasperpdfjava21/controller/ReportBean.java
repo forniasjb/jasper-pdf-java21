@@ -1,4 +1,4 @@
-package com.sandbox.com.jasperpdfjava21.controller;
+package com.sandbox.jasperpdfjava21.controller;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -12,8 +12,8 @@ import org.primefaces.model.StreamedContent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory; // Import ng SLF4J
 
-import com.sandbox.com.jasperpdfjava21.dao.BrandDao;
-import com.sandbox.com.jasperpdfjava21.entity.Brand;
+import com.sandbox.jasperpdfjava21.dao.BrandDao;
+import com.sandbox.jasperpdfjava21.entity.Brand;
 
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
@@ -37,11 +37,6 @@ public class ReportBean implements Serializable {
 
     @Inject
     private BrandDao brandDao;
-    private StreamedContent file;
-
-    public void setFile(StreamedContent file) {
-        this.file = file;
-    }
 
     // DOWNLOAD REPORT METHOD
     public StreamedContent getFile() {
@@ -54,10 +49,10 @@ public class ReportBean implements Serializable {
 
             // Load report template
             InputStream reportStream = ReportBean.class.getClassLoader()
-                    .getResourceAsStream("reports/reportbankSummary.jrxml");
+                    .getResourceAsStream("reports/reportBrandDesign.jrxml");
 
             if (reportStream == null) {
-                LOGGER.error("CRITICAL ERROR: Could not find reports/reportbankSummary.jrxml in the classpath");
+                LOGGER.error("CRITICAL ERROR: Could not find reports/reportBrandDesign.jrxml in the classpath");
                 return null;
             }
 
@@ -72,7 +67,7 @@ public class ReportBean implements Serializable {
             LOGGER.info("Report generated successfully. Size: {} bytes", pdfBytes.length);
 
             return DefaultStreamedContent.builder()
-                    .name("reportbankSummary.pdf")
+                    .name("reportBrandDesign.pdf")
                     .contentType("application/pdf")
                     .stream(() -> new ByteArrayInputStream(pdfBytes))
                     .build();
