@@ -1,163 +1,243 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Debit_Advice" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="63da1c77-b800-47e1-80f7-34210ec15d44">
-	<property name="ireport.zoom" value="1.4641000000000008"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
-	<title>
-		<band height="80">
-			<staticText>
-				<reportElement x="0" y="0" width="555" height="20" uuid="78b7b4d1-8f52-4749-8c08-011e400495f2"/>
-				<textElement textAlignment="Center">
-					<font size="14" isBold="true"/>
-				</textElement>
-				<text><![CDATA[BANGKO SENTRAL NG PILIPINAS]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="0" y="20" width="555" height="45" uuid="c4d02619-3548-4a6c-9c98-1e43e7456d92"/>
-				<textElement textAlignment="Center">
-					<font size="12" isBold="true"/>
-				</textElement>
-				<text><![CDATA[FINANCIAL ACCOUNTING DEPARTMENT
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+    name="Debit_Advice" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20"
+    rightMargin="20" topMargin="20" bottomMargin="20" uuid="63da1c77-b800-47e1-80f7-34210ec15d44">
+    <property name="ireport.zoom" value="1.4641000000000008" />
+    <property name="ireport.x" value="0" />
+    <property name="ireport.y" value="0" />
+
+    <queryString language="SQL">
+		<![CDATA[SELECT
+            institution_name AS institutionName,
+            analysis_code AS analysisCode,
+            ticket_no AS ticketNo,
+            advice_date AS adviceDate,
+            amount,
+            particulars,
+            signatory_name AS signatoryName,
+            signatory_designation AS signatoryDesignation
+         FROM transactions]]>
+	</queryString>
+    <field name="institutionName" class="java.lang.String" />
+    <field name="analysisCode" class="java.lang.String" />
+    <field name="ticketNo" class="java.lang.String" />
+    <field name="adviceDate" class="java.util.Date" />
+    <field name="amount" class="java.math.BigDecimal" />
+    <field name="particulars" class="java.lang.String" />
+    <field name="signatoryName" class="java.lang.String" />
+    <field name="signatoryDesignation" class="java.lang.String" />
+    <title>
+        <band height="65">
+            <staticText>
+                <reportElement x="0" y="0" width="555" height="20"
+                    uuid="78b7b4d1-8f52-4749-8c08-011e400495f2" />
+                <textElement textAlignment="Center">
+                    <font size="14" isBold="true" />
+                </textElement>
+                <text><![CDATA[BANGKO SENTRAL NG PILIPINAS]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="0" y="20" width="555" height="35"
+                    uuid="c4d02619-3548-4a6c-9c98-1e43e7456d92" />
+                <textElement textAlignment="Center">
+                    <font size="12" isBold="true" />
+                </textElement>
+                <text><![CDATA[FINANCIAL ACCOUNTING DEPARTMENT
 DEBIT ADVICE]]></text>
-			</staticText>
-		</band>
-	</title>
-	<pageHeader>
-		<band height="80">
-			<rectangle>
-				<reportElement x="0" y="0" width="390" height="75" uuid="f9d6c4e0-7c26-4b69-8d76-e26b1d5c58a1"/>
-			</rectangle>
-			<staticText>
-				<reportElement x="5" y="5" width="60" height="15" uuid="a3c9e6b3-6c82-4f36-9b1d-8f92b7c4d5e2"/>
-				<textElement>
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[MAIL TO:]]></text>
-			</staticText>
-			<rectangle>
-				<reportElement x="390" y="0" width="165" height="37" uuid="e6d8a4f1-5b72-4d5e-9a8c-2f3c7e4b5d6a"/>
-			</rectangle>
-			<staticText>
-				<reportElement x="395" y="5" width="60" height="15" uuid="d2f4b5c6-7a8e-4b9d-9f1c-3e2a8d7c4b5a"/>
-				<textElement>
-					<font size="10" isBold="false"/>
-				</textElement>
-				<text><![CDATA[TICKET NO:]]></text>
-			</staticText>
-			<rectangle>
-				<reportElement x="390" y="37" width="165" height="38" uuid="4924629a-63bc-4d8f-9065-9d1e0d6ac0a4"/>
-			</rectangle>
-			<staticText>
-				<reportElement x="395" y="20" width="60" height="15" uuid="24aa81b5-f463-4cd0-98f6-72272b6e7a22"/>
-				<textElement textAlignment="Center"/>
-				<text><![CDATA[DATE:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="395" y="37" width="60" height="38" uuid="88cc6f91-7ffb-4308-9424-93b90e495666"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<text><![CDATA[PHP]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="65" y="5" width="120" height="15" uuid="cadc026c-c861-4e4a-9849-7a6a7621d247"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[("<INSTITUTION NAME>")]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="65" y="20" width="120" height="17" uuid="9a0e8018-1f50-4902-addc-0afc9837930b"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[("<ANALYSIS CODE>")]]></textFieldExpression>
-			</textField>
-			<textField pattern="MM/dd/yyyy">
-				<reportElement x="473" y="20" width="69" height="15" uuid="18340603-eb67-40e8-b9b6-3506943760c9"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="473" y="5" width="69" height="15" uuid="48f31f28-a759-4e1b-a5d1-8520fc7ba515"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[("number")]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="455" y="37" width="100" height="38" uuid="7c675a9e-0617-4f6e-b8f2-32a15d2a1eb5"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[("<amount in figures>")]]></textFieldExpression>
-			</textField>
-		</band>
-	</pageHeader>
-	<detail>
-		<band height="135">
-			<staticText>
-				<reportElement x="0" y="10" width="555" height="20" uuid="f5b8a9c1-4d3e-4f2a-8b6d-7e9a0c1b5d4f"/>
-				<text><![CDATA[WE HAVE CHARGED TODAY YOUR DEMAND DEPOSIT ACCOUNT AS FOLLOWS:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="0" y="40" width="60" height="20" uuid="b7d9a1c5-8e3f-4a6c-9d2b-1f8a7e5d6c4b"/>
-				<textElement>
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[PESOS:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="381" y="80" width="174" height="15" uuid="45091871-e4d1-4f39-92b3-f39a10482b92"/>
-				<textElement textAlignment="Center">
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[BANGKO SENTRAL NG PILIPINAS]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="418" y="95" width="100" height="20" uuid="06aa18eb-5025-4c8f-9f6d-4b7391c200f2"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[("<NAME>")]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="418" y="115" width="100" height="20" uuid="4d1942e5-8c8a-47e6-94a4-4c375d4c02b3"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[("<DESIGNATION>")]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="65" y="60" width="100" height="20" uuid="c3c8b25a-3f24-4e12-85cb-107662a0c9cf"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[("<particulars>")]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="65" y="40" width="100" height="20" uuid="4008f027-3252-44c4-99e1-19c9d3e49d51"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[("<amount in words>")]]></textFieldExpression>
-			</textField>
-		</band>
-	</detail>
-	<pageFooter>
-		<band height="30">
-			<staticText>
-				<reportElement x="5" y="0" width="102" height="12" uuid="fc2cfc42-236e-4475-ae5c-910a51c7f00e"/>
-				<textElement>
-					<font size="8"/>
-				</textElement>
-				<text><![CDATA[BIR PERMIT to USE (PTU)]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="107" y="0" width="78" height="12" uuid="c1bcdcdd-3832-4fc8-a15f-a182340a4078"/>
-				<textElement>
-					<font size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[("NO.XXX")]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="65" y="15" width="316" height="11" uuid="88ffb50a-62da-4c40-83e6-0e541f4f36f2"/>
-				<textElement verticalAlignment="Top">
-					<font fontName="Tahoma" size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy").format(new java.util.Date())]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="5" y="15" width="55" height="11" uuid="17ef7070-4969-401e-a294-77e839e92313"/>
-				<textElement verticalAlignment="Top">
-					<font size="8"/>
-				</textElement>
-				<text><![CDATA[Effective Date:]]></text>
-			</staticText>
-		</band>
-	</pageFooter>
+            </staticText>
+        </band>
+    </title>
+    <detail>
+        <band height="250" splitType="Stretch">
+            <!-- TOP RECTANGLE / BOXES -->
+            <rectangle>
+                <reportElement x="0" y="0" width="390" height="75"
+                    uuid="f9d6c4e0-7c26-4b69-8d76-e26b1d5c58a1" />
+            </rectangle>
+            <staticText>
+                <reportElement x="5" y="5" width="60" height="15"
+                    uuid="a3c9e6b3-6c82-4f36-9b1d-8f92b7c4d5e2" />
+                <textElement>
+                    <font isBold="true" />
+                </textElement>
+                <text><![CDATA[MAIL TO:]]></text>
+            </staticText>
+            <rectangle>
+                <reportElement x="390" y="0" width="165" height="37"
+                    uuid="e6d8a4f1-5b72-4d5e-9a8c-2f3c7e4b5d6a" />
+            </rectangle>
+            <staticText>
+                <reportElement x="395" y="5" width="60" height="15"
+                    uuid="d2f4b5c6-7a8e-4b9d-9f1c-3e2a8d7c4b5a" />
+                <textElement>
+                    <font size="10" isBold="false" />
+                </textElement>
+                <text><![CDATA[TICKET NO:]]></text>
+            </staticText>
+            <rectangle>
+                <reportElement x="390" y="37" width="165" height="38"
+                    uuid="4924629a-63bc-4d8f-9065-9d1e0d6ac0a4" />
+            </rectangle>
+            <staticText>
+                <reportElement x="395" y="20" width="60" height="15"
+                    uuid="24aa81b5-f463-4cd0-98f6-72272b6e7a22" />
+                <textElement textAlignment="Center" />
+                <text><![CDATA[DATE:]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="395" y="37" width="60" height="38"
+                    uuid="88cc6f91-7ffb-4308-9424-93b90e495666" />
+                <textElement textAlignment="Center" verticalAlignment="Middle" />
+                <text><![CDATA[PHP]]></text>
+            </staticText>
+
+            <!-- HEADER FIELDS -->
+            <textField isBlankWhenNull="true">
+                <reportElement x="65" y="5" width="315" height="15"
+                    uuid="cadc026c-c861-4e4a-9849-7a6a7621d247" />
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font size="9" isBold="true" />
+                </textElement>
+                <textFieldExpression><![CDATA[$F{institutionName}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement x="65" y="20" width="120" height="17"
+                    uuid="9a0e8018-1f50-4902-addc-0afc9837930b" />
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font size="9" />
+                </textElement>
+                <textFieldExpression><![CDATA[$F{analysisCode}]]></textFieldExpression>
+            </textField>
+            <textField pattern="yyyy-MM-dd" isBlankWhenNull="true">
+                <reportElement x="455" y="20" width="95" height="15"
+                    uuid="18340603-eb67-40e8-b9b6-3506943760c9" />
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="9" />
+                </textElement>
+                <textFieldExpression><![CDATA[$F{adviceDate} != null ? $F{adviceDate} : new java.util.Date()]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement x="455" y="5" width="95" height="15"
+                    uuid="48f31f28-a759-4e1b-a5d1-8520fc7ba515" />
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="9" isBold="true" />
+                </textElement>
+                <textFieldExpression><![CDATA[$F{ticketNo}]]></textFieldExpression>
+            </textField>
+            <textField pattern="#,##0.00" isBlankWhenNull="true">
+                <reportElement x="455" y="43" width="95" height="26"
+                    uuid="7c675a9e-0617-4f6e-b8f2-32a15d2a1eb5" />
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="10" isBold="true" />
+                </textElement>
+                <textFieldExpression><![CDATA[$F{amount}]]></textFieldExpression>
+            </textField>
+
+            <!-- DETAIL BODY CONTENT -->
+            <staticText>
+                <reportElement x="0" y="85" width="555" height="20"
+                    uuid="f5b8a9c1-4d3e-4f2a-8b6d-7e9a0c1b5d4f" />
+                <text><![CDATA[WE HAVE CHARGED TODAY YOUR DEMAND DEPOSIT ACCOUNT AS FOLLOWS:]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="0" y="115" width="60" height="20"
+                    uuid="b7d9a1c5-8e3f-4a6c-9d2b-1f8a7e5d6c4b" />
+                <textElement>
+                    <font isBold="true" />
+                </textElement>
+                <text><![CDATA[PESOS:]]></text>
+            </staticText>
+
+            <!-- AMOUNT IN WORDS CONVERSION (Naka-isStretchWithOverflow at pinalaki ang height) -->
+            <textField isStretchWithOverflow="true" isBlankWhenNull="true">
+                <reportElement x="65" y="115" width="485" height="45"
+                    uuid="4008f027-3252-44c4-99e1-19c9d3e49d51" />
+                <textElement textAlignment="Left" verticalAlignment="Top">
+                    <font size="8" isBold="true" />
+                </textElement>
+                <textFieldExpression><![CDATA[com.sandbox.jasperpdfjava21.utils.NumberToWordsConverter.convertAmountToWords($F{amount})]]></textFieldExpression>
+            </textField>
+
+            <!-- PARTICULARS (Inibaba ang y position sa 165 para may sapat na espasyo ang trilyong
+            piso) -->
+            <textField isBlankWhenNull="true">
+                <reportElement x="65" y="165" width="485" height="25"
+                    uuid="c3c8b25a-3f24-4e12-85cb-107662a0c9cf" />
+                <textElement textAlignment="Left" verticalAlignment="Top">
+                    <font size="9" />
+                </textElement>
+                <textFieldExpression><![CDATA[$F{particulars}]]></textFieldExpression>
+            </textField>
+
+            <!-- SIGNATORIES -->
+            <staticText>
+                <reportElement x="381" y="195" width="174" height="15"
+                    uuid="45091871-e4d1-4f39-92b3-f39a10482b92" />
+                <textElement textAlignment="Center">
+                    <font isBold="true" />
+                </textElement>
+                <text><![CDATA[BANGKO SENTRAL NG PILIPINAS]]></text>
+            </staticText>
+            <textField isBlankWhenNull="true">
+                <reportElement x="381" y="210" width="174" height="15"
+                    uuid="06aa18eb-5025-4c8f-9f6d-4b7391c200f2" />
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font isBold="true" />
+                </textElement>
+                <textFieldExpression><![CDATA[$F{signatoryName}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement x="381" y="225" width="174" height="15"
+                    uuid="4d1942e5-8c8a-47e6-94a4-4c375d4c02b3" />
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="9" />
+                </textElement>
+                <textFieldExpression><![CDATA[$F{signatoryDesignation}]]></textFieldExpression>
+            </textField>
+
+            <!-- SEPARATOR LINE PER TRANSACTION -->
+            <line>
+                <reportElement x="0" y="245" width="555" height="1" forecolor="#CCCCCC"
+                    uuid="a1b2c3d4-e5f6-7890-abcd-1234567890ab" />
+            </line>
+        </band>
+    </detail>
+    <pageFooter>
+        <band height="30">
+            <staticText>
+                <reportElement x="5" y="0" width="102" height="12"
+                    uuid="fc2cfc42-236e-4475-ae5c-910a51c7f00e" />
+                <textElement>
+                    <font size="8" />
+                </textElement>
+                <text><![CDATA[BIR PERMIT to USE (PTU)]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="107" y="0" width="78" height="12"
+                    uuid="c1bcdcdd-3832-4fc8-a15f-a182340a4078" />
+                <textElement>
+                    <font size="8" />
+                </textElement>
+                <textFieldExpression><![CDATA["NO.XXX"]]></textFieldExpression>
+            </textField>
+            <textField pattern="dd/MM/yyyy">
+                <reportElement x="65" y="15" width="316" height="11"
+                    uuid="88ffb50a-62da-4c40-83e6-0e541f4f36f2" />
+                <textElement verticalAlignment="Top">
+                    <font fontName="Tahoma" size="8" />
+                </textElement>
+                <textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="5" y="15" width="55" height="11"
+                    uuid="17ef7070-4969-401e-a294-77e839e92313" />
+                <textElement verticalAlignment="Top">
+                    <font size="8" />
+                </textElement>
+                <text><![CDATA[Effective Date:]]></text>
+            </staticText>
+        </band>
+    </pageFooter>
 </jasperReport>
