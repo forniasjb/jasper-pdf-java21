@@ -121,11 +121,9 @@ public class ReportBean implements Serializable {
     // DOWNLOAD REPORT METHOD (As Attachment)
     public void downloadBrandPerGrouping() {
         LOGGER.info("Starting 'Brand Per Grouping' report generation for download...");
-
         try {
             List<Brand> brandList = brandDao.findAll();
             JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(brandList, false);
-
             InputStream reportStream = getClass().getClassLoader()
                     .getResourceAsStream("reports/brandPerGrouping.jrxml");
 
