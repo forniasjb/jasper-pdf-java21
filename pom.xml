@@ -45,6 +45,13 @@
             <version>3.5.3</version>
         </dependency>
 
+        <!-- Source: https://mvnrepository.com/artifact/com.ibm.db2/jcc -->
+        <dependency>
+            <groupId>com.ibm.db2</groupId>
+            <artifactId>jcc</artifactId>
+            <version>11.5.8.0</version>
+        </dependency>
+
         <!-- ============================================================ -->
         <!-- PrimeFaces -->
         <!-- ============================================================ -->

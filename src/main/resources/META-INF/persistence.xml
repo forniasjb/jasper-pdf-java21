@@ -31,4 +31,25 @@
                 value="true" />
         </properties>
     </persistence-unit>
+
+
+    <!-- 2. IBM DB2 Server Connection (Batay sa iyong DBeaver config) -->
+    <persistence-unit name="db2PU">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <properties>
+            <!-- DB2 JDBC Driver (Siguraduhing naka-add ang db2jcc.jar o jcc.jar sa dependencies ng
+            project) -->
+            <property name="javax.persistence.jdbc.driver" value="com.ibm.db2.jcc.DB2Driver" />
+            <property name="javax.persistence.jdbc.url"
+                value="jdbc:db2://SXA02ASG3DB1D:61000/ASG3DEV" />
+            <property name="javax.persistence.jdbc.user" value="asg3" />
+            <property name="javax.persistence.jdbc.password" value="asg3password" />
+
+            <!-- Hibernate Dialect para sa DB2 -->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.DB2Dialect" />
+            <property name="hibernate.hbm2ddl.auto" value="none" />
+            <property name="hibernate.show_sql" value="true" />
+            <property name="hibernate.format_sql" value="true" />
+        </properties>
+    </persistence-unit>
 </persistence>

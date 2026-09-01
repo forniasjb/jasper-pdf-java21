@@ -3,6 +3,32 @@
 	<property name="ireport.zoom" value="1.2100000000000017"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<parameter name="TICKET_FROM" class="java.lang.String"/>
+	<parameter name="TICKET_TO" class="java.lang.String"/>
+	<field name="RC_CODE" class="java.lang.String"/>
+	<field name="RC_DESC" class="java.lang.String"/>
+	<field name="TRANS_TYPE" class="java.lang.String"/>
+	<field name="TRANS_TYPE_DESC" class="java.lang.String"/>
+	<field name="TRANS_ID" class="java.lang.String"/>
+	<field name="TRANS_ID_DESC" class="java.lang.String"/>
+	<field name="TICKET_NO" class="java.lang.String"/>
+	<field name="TRANS_DATE" class="java.util.Date"/>
+	<field name="PREPARED_BY" class="java.lang.String"/>
+	<field name="REVIEWED_BY" class="java.lang.String"/>
+	<field name="APPROVED_BY" class="java.lang.String"/>
+	<field name="GL_ACCOUNT_CODE" class="java.lang.String"/>
+	<field name="GL_ACCOUNT_DESCRIPTION" class="java.lang.String"/>
+	<field name="ANALYSIS_CODE" class="java.lang.String"/>
+	<field name="ANALYSIS_DESCRIPTION" class="java.lang.String"/>
+	<field name="DEBIT" class="java.math.BigDecimal"/>
+	<field name="CREDIT" class="java.math.BigDecimal"/>
+	<field name="PARTICULARS" class="java.lang.String"/>
+	<variable name="TOTAL_DEBIT" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{DEBIT}]]></variableExpression>
+	</variable>
+	<variable name="TOTAL_CREDIT" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{CREDIT}]]></variableExpression>
+	</variable>
 	<title>
 		<band height="148" splitType="Stretch">
 			<staticText>
@@ -89,57 +115,57 @@
 			<textField>
 				<reportElement x="210" y="70" width="100" height="15" uuid="0576e049-1dca-47e7-99d5-448f58a3895f"/>
 				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[("1112")]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{RC_CODE}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="210" y="85" width="100" height="15" uuid="a87d20c6-87f4-472b-b6d1-726d3d4764d2"/>
 				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[("4900")]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{TRANS_TYPE}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="210" y="100" width="100" height="15" uuid="32c80396-995a-4c01-ab80-c607cc5c67ac"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[("1234")]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{TRANS_ID}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="345" y="70" width="100" height="15" uuid="2a889a41-1afb-4597-98a5-896dd7719f22"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[("DUMAGUETE")]]></textFieldExpression>
+				<reportElement x="345" y="70" width="150" height="15" uuid="2a889a41-1afb-4597-98a5-896dd7719f22"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{RC_DESC}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="345" y="85" width="100" height="15" uuid="78cd5d20-90e4-4f60-ae05-60ded70b3d71"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[("Other Adjustment")]]></textFieldExpression>
+				<reportElement x="345" y="85" width="150" height="15" uuid="78cd5d20-90e4-4f60-ae05-60ded70b3d71"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{TRANS_TYPE_DESC}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="345" y="100" width="100" height="15" uuid="f0fffd6c-4418-4241-ab82-8966e2ffddba"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[("Other Adjustment")]]></textFieldExpression>
+				<reportElement x="345" y="100" width="150" height="15" uuid="f0fffd6c-4418-4241-ab82-8966e2ffddba"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{TRANS_ID_DESC}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="713" y="52" width="70" height="15" uuid="21a998f0-0f5c-40b7-b372-6594d67f3c37"/>
 				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[("99")]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{TICKET_NO}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="713" y="115" width="68" height="20" uuid="bb6dc187-fe35-4421-8f0f-b1653d40c6c5"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[("DOEGREG")]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{APPROVED_BY}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="713" y="100" width="68" height="15" uuid="af8ef866-96b0-494b-82b0-f2df563ca2d4"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[("DOEJANE")]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{REVIEWED_BY}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="713" y="85" width="70" height="15" uuid="6fbb954f-6bca-4d39-8246-f466384d6b70"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[("DOEJOHN")]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{PREPARED_BY}]]></textFieldExpression>
 			</textField>
 			<textField pattern="MM/dd/yyyy">
 				<reportElement x="713" y="67" width="70" height="18" uuid="a1e469b5-43ae-4cdc-8a14-85ce730dba04"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{TRANS_DATE}]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
@@ -176,51 +202,35 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="66" splitType="Stretch">
+		<band height="45" splitType="Stretch">
 			<line>
-				<reportElement x="0" y="35" width="802" height="1" uuid="41b65b05-05ad-4423-b42e-97788890c721"/>
+				<reportElement x="0" y="38" width="802" height="1" uuid="41b65b05-05ad-4423-b42e-97788890c721"/>
 			</line>
 			<textField>
 				<reportElement x="12" y="0" width="100" height="15" uuid="7f84a216-7186-4e7d-8b81-398d10fd0fe9"/>
-				<textFieldExpression><![CDATA[("11223311")]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{GL_ACCOUNT_CODE}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="12" y="15" width="100" height="15" uuid="56ff47e7-b560-40a9-bd0e-1c23da433744"/>
-				<textFieldExpression><![CDATA[("005000020")]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{ANALYSIS_CODE}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="127" y="0" width="218" height="15" uuid="0f76606e-bc7e-4a2d-becf-56e73f16cac6"/>
-				<textFieldExpression><![CDATA[("DEMAND DEPOSIT ACCOUNT - REGULAR")]]></textFieldExpression>
+				<reportElement x="127" y="0" width="300" height="15" uuid="0f76606e-bc7e-4a2d-becf-56e73f16cac6"/>
+				<textFieldExpression><![CDATA[$F{GL_ACCOUNT_DESCRIPTION}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="127" y="15" width="218" height="15" uuid="8fe7778a-12c9-4c22-bcd5-222f4d33cd3f"/>
-				<textFieldExpression><![CDATA[("LAND BANK OF THE PHILIPPINES")]]></textFieldExpression>
+				<reportElement x="127" y="15" width="300" height="15" uuid="8fe7778a-12c9-4c22-bcd5-222f4d33cd3f"/>
+				<textFieldExpression><![CDATA[$F{ANALYSIS_DESCRIPTION}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement x="445" y="5" width="125" height="15" uuid="bac729be-fbed-4d62-a006-961ea523b73f"/>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression><![CDATA[("900.00")]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{DEBIT}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="630" y="40" width="100" height="15" uuid="ceb1e3fb-6bc1-4a55-bf88-6811e1134822"/>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="630" y="5" width="100" height="15" uuid="ceb1e3fb-6bc1-4a55-bf88-6811e1134822"/>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression><![CDATA[("900.00")]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="12" y="36" width="100" height="14" uuid="bd017515-460c-4dda-acff-a615b7854e09"/>
-				<textFieldExpression><![CDATA[("11223311")]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="12" y="50" width="100" height="13" uuid="0715588b-3735-412b-91af-b95003b947eb"/>
-				<textFieldExpression><![CDATA[("005000020")]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="127" y="36" width="218" height="14" uuid="76d8393c-0d58-4a1b-87a9-ed5c53996294"/>
-				<textFieldExpression><![CDATA[("DEMAND DEPOSIT ACCOUNT  - ACCOUNT")]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="127" y="50" width="218" height="13" uuid="fffbbec9-5ac7-4e1a-85b4-b3ce7a47611b"/>
-				<textFieldExpression><![CDATA[("LAND BANK OF THE PHILIPPINES")]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{CREDIT}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
@@ -234,10 +244,10 @@
 				<text><![CDATA[TOTAL]]></text>
 			</staticText>
 			<line>
-				<reportElement x="500" y="18" width="230" height="1" uuid="b98f3000-45a5-470d-9345-153e9fd86339"/>
+				<reportElement x="445" y="18" width="285" height="1" uuid="b98f3000-45a5-470d-9345-153e9fd86339"/>
 			</line>
 			<line>
-				<reportElement x="500" y="21" width="230" height="1" uuid="1eab4391-dd27-43c1-81b2-80c9cd1025b7"/>
+				<reportElement x="445" y="21" width="285" height="1" uuid="1eab4391-dd27-43c1-81b2-80c9cd1025b7"/>
 			</line>
 			<staticText>
 				<reportElement x="0" y="70" width="100" height="20" uuid="591330e0-8d1c-47a8-ab3b-b9b670283b86"/>
@@ -246,23 +256,23 @@
 			<rectangle>
 				<reportElement x="100" y="50" width="680" height="54" uuid="f38e55fd-db5a-4630-b1ce-08d916a50399"/>
 			</rectangle>
-			<textField>
-				<reportElement x="500" y="3" width="70" height="15" uuid="7da583d2-f13a-43e3-8750-fe738e4e9a21"/>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="445" y="3" width="125" height="15" uuid="7da583d2-f13a-43e3-8750-fe738e4e9a21"/>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression><![CDATA[("900.00")]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{TOTAL_DEBIT}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement x="630" y="3" width="100" height="15" uuid="dbeb0007-2496-4306-96cc-bc3c87b50de6"/>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression><![CDATA[("900.00")]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{TOTAL_CREDIT}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="0" y="0" width="802" height="1" uuid="1c031f2e-1be5-4bf2-9c49-b52efea5707f"/>
 			</line>
-			<staticText>
-				<reportElement x="103" y="50" width="183" height="20" uuid="faad8263-5a38-45fe-bb57-c7edc9254806"/>
-				<text><![CDATA[Fund Transfer from Regular to Instapay]]></text>
-			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="103" y="50" width="670" height="50" uuid="faad8263-5a38-45fe-bb57-c7edc9254806"/>
+				<textFieldExpression><![CDATA[$F{PARTICULARS}]]></textFieldExpression>
+			</textField>
 			<staticText>
 				<reportElement x="0" y="139" width="230" height="23" uuid="3fb9968d-a1ff-4a3d-94c2-2d36486cfdec"/>
 				<textElement>

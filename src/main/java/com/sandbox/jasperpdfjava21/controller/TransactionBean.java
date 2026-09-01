@@ -101,11 +101,11 @@ public class TransactionBean implements Serializable {
             JasperExportManager.exportReportToPdfStream(jasperPrint, byteArrayOutputStream);
             byte[] pdfBytes = byteArrayOutputStream.toByteArray();
 
-            LOGGER.info("Financial_Accounting_Department_Debit_Advice report generated successfully. Size: {} bytes",
+            LOGGER.info("Ticket report generated successfully. Size: {} bytes",
                     pdfBytes.length);
 
             return DefaultStreamedContent.builder()
-                    .name("Financial_Accounting_Department_Debit_Advice.pdf")
+                    .name("Ticket.pdf")
                     .contentType("application/pdf")
                     .stream(() -> new ByteArrayInputStream(pdfBytes))
                     .build();
@@ -121,7 +121,6 @@ public class TransactionBean implements Serializable {
     }
 
     // First Method to generate report using JDBC Connection
-
     // public StreamedContent getFile() {
     // LOGGER.info(
     // "Starting Financial_Accounting_Department_Debit_Advice report generation

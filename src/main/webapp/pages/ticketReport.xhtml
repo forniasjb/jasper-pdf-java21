@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://java.sun.com/jsf/core"
+>
+    <h:head>
+        <title>Generate Ticket Report</title>
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+                font-family: Arial, Helvetica, sans-serif;
+                background: #f5f7fa;
+            }
+            .page-container {
+                padding: 30px;
+            }
+            .report-card {
+                max-width: 1000px;
+                margin: 0 auto;
+            }
+            .report-header {
+                margin-bottom: 25px;
+            }
+            .report-title {
+                font-size: 24px;
+                font-weight: 600;
+                margin-bottom: 5px;
+            }
+            .report-subtitle {
+                color: #6b7280;
+                font-size: 14px;
+            }
+            .filter-section {
+                padding: 10px 5px;
+            }
+            .filter-label {
+                display: block;
+                font-size: 14px;
+                font-weight: 600;
+                margin-bottom: 7px;
+            }
+            .filter-input {
+                width: 100%;
+                box-sizing: border-box;
+            }
+            .button-container {
+                display: flex;
+                justify-content: flex-end;
+                gap: 10px;
+                margin-top: 25px;
+            }
+            .section-title {
+                font-size: 16px;
+                font-weight: 600;
+                margin-bottom: 15px;
+            }
+            .report-type-container {
+                max-width: 400px;
+                margin-bottom: 10px;
+            }
+        </style>
+    </h:head>
+
+    <h:body>
+        <div class="page-container">
+            <div class="report-card">
+                <!-- MAIN FORM -->
+                <h:form id="generateReportForm">
+                    <p:messages
+                        id="messages"
+                        showDetail="true"
+                        closable="true"
+                    />
+
+                    <div class="report-header">
+                        <div class="report-title">Generate Ticket Report</div>
+                        <div class="report-subtitle">
+                            Select a report type to continue.
+                        </div>
+                    </div>
+
+                    <p:panel header="Report Type">
+                        <div class="filter-section">
+                            <div class="section-title">Select Report</div>
+                            <div class="report-type-container">
+                                <p:outputLabel
+                                    for="reportType"
+                                    value="Report Type"
+                                    styleClass="filter-label"
+                                />
+                                <p:selectOneMenu
+                                    id="reportType"
+                                    value="#{ticketReportBean.reportType}"
+                                    style="width: 100%"
+                                >
+                                    <f:selectItem
+                                        itemLabel="-- Select Report Type --"
+                                        itemValue=""
+                                        noSelectionOption="true"
+                                    />
+                                    <f:selectItem
+                                        itemLabel="DTDTS"
+                                        itemValue="DTDTS"
+                                    />
+                                    <f:selectItem
+                                        itemLabel="DDSOA"
+                                        itemValue="DDSOA"
+                                    />
+                                </p:selectOneMenu>
+                            </div>
+
+                            <div class="button-container">
+                                <p:commandButton
+                                    value="Proceed"
+                                    icon="pi pi-arrow-right"
+                                    action="#{ticketReportBean.proceed}"
+                                    process="@form"
+                                    update="messages dtdtsFiltersContainer ddsOaFiltersContainer"
+                                    oncomplete="
+                                        if (args &amp;&amp; args.showDtdtsDialog) { PF('dtdtsDialog').show(); }
+                                        if (args &amp;&amp; args.showDdsOaDialog) { PF('ddsOaDialog').show(); }
+                                    "
+                                    styleClass="ui-button-success"
+                                />
+                            </div>
+                        </div>
+                    </p:panel>
+
+                    <!-- DTDTS MAIN FILTERS -->
+                    <h:panelGroup id="dtdtsFiltersContainer">
+                        <p:panel
+                            id="dtdtsFilters"
+                            header="DTDTS Report Filters"
+                            rendered="#{ticketReportBean.showDtdtsFilters}"
+                        >
+                            <div class="filter-section">
+                                <div class="section-title">
+                                    Account Information
+                                </div>
+                                <div class="ui-fluid">
+                                    <div class="ui-g">
+                                        <div class="ui-g-12 ui-md-6">
+                                            <p:outputLabel
+                                                for="glAccountCode"
+                                                value="GL Account Code"
+                                                styleClass="filter-label"
+                                            />
+                                            <p:inputText
+                                                id="glAccountCode"
+                                                value="#{ticketReportBean.glAccountCode}"
+                                                styleClass="filter-input"
+                                            />
+                                        </div>
+                                        <div class="ui-g-12 ui-md-6">
+                                            <p:outputLabel
+                                                for="analysisCode"
+                                                value="Analysis Code"
+                                                styleClass="filter-label"
+                                            />
+                                            <p:inputText
+                                                id="analysisCode"
+                                                value="#{ticketReportBean.analysisCode}"
+                                                styleClass="filter-input"
+                                            />
+                                        </div>
+                                        <div class="ui-g-12 ui-md-6">
+                                            <p:outputLabel
+                                                for="mainAccountNoFrom"
+                                                value="Account No. From"
+                                                styleClass="filter-label"
+                                            />
+                                            <p:inputText
+                                                id="mainAccountNoFrom"
+                                                value="#{ticketReportBean.accountNoFrom}"
+                                                styleClass="filter-input"
+                                            />
+                                        </div>
+                                        <div class="ui-g-12 ui-md-6">
+                                            <p:outputLabel
+                                                for="mainAccountNoTo"
+                                                value="Account No. To"
+                                                styleClass="filter-label"
+                                            />
+                                            <p:inputText
+                                                id="mainAccountNoTo"
+                                                value="#{ticketReportBean.accountNoTo}"
+                                                styleClass="filter-input"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="button-container">
+                                    <p:commandButton
+                                        value="Clear"
+                                        icon="pi pi-refresh"
+                                        action="#{ticketReportBean.clearDtdtsFilters}"
+                                        update="dtdtsFilters"
+                                        styleClass="ui-button-secondary"
+                                        process="@this"
+                                    />
+                                    <p:commandButton
+                                        value="Generate PDF"
+                                        icon="pi pi-file-pdf"
+                                        ajax="false"
+                                        action="#{ticketReportBean.generateReport}"
+                                        styleClass="ui-button-success"
+                                    >
+                                        <p:fileDownload
+                                            value="#{ticketReportBean.file}"
+                                        />
+                                    </p:commandButton>
+                                </div>
+                            </div>
+                        </p:panel>
+                    </h:panelGroup>
+
+                    <!-- DDSOA MAIN FILTERS -->
+                    <h:panelGroup id="ddsOaFiltersContainer">
+                        <p:panel
+                            id="ddsOaFilters"
+                            header="DDSOA Report Filters"
+                            rendered="#{ticketReportBean.showDdsOaFilters}"
+                        >
+                            <div class="filter-section">
+                                <div class="section-title">
+                                    Ticket Information
+                                </div>
+                                <div class="ui-fluid">
+                                    <div class="ui-g">
+                                        <div class="ui-g-12 ui-md-6">
+                                            <p:outputLabel
+                                                for="mainTicketNoFrom"
+                                                value="Ticket No. From"
+                                                styleClass="filter-label"
+                                            />
+                                            <p:inputText
+                                                id="mainTicketNoFrom"
+                                                value="#{ticketReportBean.ticketNoFrom}"
+                                                styleClass="filter-input"
+                                            />
+                                        </div>
+                                        <div class="ui-g-12 ui-md-6">
+                                            <p:outputLabel
+                                                for="mainTicketNoTo"
+                                                value="Ticket No. To"
+                                                styleClass="filter-label"
+                                            />
+                                            <p:inputText
+                                                id="mainTicketNoTo"
+                                                value="#{ticketReportBean.ticketNoTo}"
+                                                styleClass="filter-input"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="button-container">
+                                    <p:commandButton
+                                        value="Clear"
+                                        icon="pi pi-refresh"
+                                        action="#{ticketReportBean.clearDdsOaFilters}"
+                                        update="ddsOaFilters"
+                                        styleClass="ui-button-secondary"
+                                        process="@this"
+                                    />
+                                    <p:commandButton
+                                        value="Generate PDF"
+                                        icon="pi pi-file-pdf"
+                                        ajax="false"
+                                        action="#{ticketReportBean.generateDdsOaReport}"
+                                        styleClass="ui-button-success"
+                                    >
+                                        <p:fileDownload
+                                            value="#{ticketReportBean.file}"
+                                        />
+                                    </p:commandButton>
+                                </div>
+                            </div>
+                        </p:panel>
+                    </h:panelGroup>
+                </h:form>
+
+                <!-- DTDTS MODAL -->
+                <p:dialog
+                    id="dtdtsDialog"
+                    widgetVar="dtdtsDialog"
+                    header="DTDTS Report Filters"
+                    modal="true"
+                    closable="true"
+                    resizable="false"
+                    draggable="false"
+                    width="600"
+                    appendTo="@(body)"
+                >
+                    <h:form id="dtdtsDialogForm">
+                        <div class="filter-section">
+                            <div class="section-title">Account Information</div>
+                            <p:messages
+                                id="dtdtsMessages"
+                                showDetail="true"
+                                closable="true"
+                            />
+                            <div class="ui-fluid">
+                                <div class="ui-g">
+                                    <div class="ui-g-12 ui-md-6">
+                                        <p:outputLabel
+                                            for="dtdtsAccountNoFrom"
+                                            value="Account No. From"
+                                            styleClass="filter-label"
+                                        />
+                                        <p:inputText
+                                            id="dtdtsAccountNoFrom"
+                                            value="#{ticketReportBean.accountNoFrom}"
+                                            styleClass="filter-input"
+                                            placeholder="Enter starting account number"
+                                        />
+                                    </div>
+                                    <div class="ui-g-12 ui-md-6">
+                                        <p:outputLabel
+                                            for="dtdtsAccountNoTo"
+                                            value="Account No. To"
+                                            styleClass="filter-label"
+                                        />
+                                        <p:inputText
+                                            id="dtdtsAccountNoTo"
+                                            value="#{ticketReportBean.accountNoTo}"
+                                            styleClass="filter-input"
+                                            placeholder="Enter ending account number"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="button-container">
+                            <p:commandButton
+                                value="Cancel"
+                                icon="pi pi-times"
+                                type="button"
+                                onclick="PF('dtdtsDialog').hide()"
+                                styleClass="ui-button-secondary"
+                            />
+                            <p:commandButton
+                                value="Proceed"
+                                icon="pi pi-arrow-right"
+                                action="#{ticketReportBean.clearDtdtsFilters}"
+                                process="@form"
+                                update="dtdtsMessages :generateReportForm:dtdtsFiltersContainer"
+                                oncomplete="if (args &amp;&amp; !args.validationFailed) { PF('dtdtsDialog').hide(); }"
+                                styleClass="ui-button-success"
+                            />
+                        </div>
+                    </h:form>
+                </p:dialog>
+
+                <!-- DDSOA MODAL -->
+                <p:dialog
+                    id="ddsOaDialog"
+                    widgetVar="ddsOaDialog"
+                    header="DDSOA Report Filters"
+                    modal="true"
+                    closable="true"
+                    resizable="false"
+                    draggable="false"
+                    width="600"
+                    appendTo="@(body)"
+                >
+                    <h:form id="ddsOaDialogForm">
+                        <div class="filter-section">
+                            <div class="section-title">Ticket Information</div>
+                            <p:messages
+                                id="ddsOaMessages"
+                                showDetail="true"
+                                closable="true"
+                            />
+                            <div class="ui-fluid">
+                                <div class="ui-g">
+                                    <div class="ui-g-12 ui-md-6">
+                                        <p:outputLabel
+                                            for="ticketNoFrom"
+                                            value="Ticket No. From"
+                                            styleClass="filter-label"
+                                        />
+                                        <p:inputText
+                                            id="ticketNoFrom"
+                                            value="#{ticketReportBean.ticketNoFrom}"
+                                            styleClass="filter-input"
+                                            placeholder="Enter starting ticket number"
+                                        />
+                                    </div>
+                                    <div class="ui-g-12 ui-md-6">
+                                        <p:outputLabel
+                                            for="ticketNoTo"
+                                            value="Ticket No. To"
+                                            styleClass="filter-label"
+                                        />
+                                        <p:inputText
+                                            id="ticketNoTo"
+                                            value="#{ticketReportBean.ticketNoTo}"
+                                            styleClass="filter-input"
+                                            placeholder="Enter ending ticket number"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="button-container">
+                            <p:commandButton
+                                value="Cancel"
+                                icon="pi pi-times"
+                                type="button"
+                                onclick="PF('ddsOaDialog').hide()"
+                                styleClass="ui-button-secondary"
+                            />
+                            <p:commandButton
+                                value="Proceed"
+                                icon="pi pi-arrow-right"
+                                action="#{ticketReportBean.continueDdsOa}"
+                                process="@form"
+                                update="ddsOaMessages :generateReportForm:ddsOaFiltersContainer"
+                                oncomplete="if (args &amp;&amp; !args.validationFailed) { PF('ddsOaDialog').hide(); }"
+                                styleClass="ui-button-success"
+                            />
+                        </div>
+                    </h:form>
+                </p:dialog>
+            </div>
+        </div>
+    </h:body>
+</html>
