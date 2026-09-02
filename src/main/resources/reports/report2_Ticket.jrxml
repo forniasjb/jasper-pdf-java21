@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Tickets" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="822" leftMargin="10" rightMargin="10" topMargin="10" bottomMargin="10" uuid="99cedca6-cc3b-4a16-85d2-25f97ee24bbf">
-	<property name="ireport.zoom" value="1.331000000000002"/>
+	<property name="ireport.zoom" value="1.4641000000000022"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="TICKET_FROM" class="java.lang.String"/>
@@ -201,7 +201,7 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="105" splitType="Stretch">
+		<band height="123" splitType="Stretch">
 			<textField>
 				<reportElement x="12" y="0" width="100" height="15" uuid="7f84a216-7186-4e7d-8b81-398d10fd0fe9"/>
 				<textFieldExpression><![CDATA[$F{GL_ACCOUNT_CODE}]]></textFieldExpression>
@@ -263,10 +263,10 @@
 				<text><![CDATA[Particulars]]></text>
 			</staticText>
 			<rectangle>
-				<reportElement x="127" y="67" width="693" height="30" uuid="f38e55fd-db5a-4630-b1ce-08d916a50399"/>
+				<reportElement x="127" y="67" width="693" height="44" uuid="f38e55fd-db5a-4630-b1ce-08d916a50399"/>
 			</rectangle>
 			<textField isBlankWhenNull="true">
-				<reportElement x="132" y="70" width="678" height="24" uuid="faad8263-5a38-45fe-bb57-c7edc9254806"/>
+				<reportElement x="132" y="70" width="678" height="25" uuid="faad8263-5a38-45fe-bb57-c7edc9254806"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{PARTICULARS}]]></textFieldExpression>
 			</textField>
@@ -285,3 +285,4 @@ does not require a signature.]]></text>
 		</band>
 	</pageFooter>
 </jasperReport>
+s
