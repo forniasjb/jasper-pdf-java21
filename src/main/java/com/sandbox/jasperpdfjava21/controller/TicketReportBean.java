@@ -39,11 +39,17 @@ public class TicketReportBean implements Serializable {
     private String accountNoFrom;
     private String accountNoTo;
 
+    // Flags to toggle visibility of filter sections on the main page
     private boolean showDtdtsFilters = false;
     private boolean showDdsOaFilters = false;
 
+    // StreamedContent object used for PrimeFaces file download component
     private StreamedContent file;
 
+    /**
+     * Handles the initial selection of the report type and determines
+     * which modal dialog should be displayed via PrimeFaces callback parameters.
+     */
     public void proceed() {
         showDtdtsFilters = false;
         showDdsOaFilters = false;
@@ -66,6 +72,10 @@ public class TicketReportBean implements Serializable {
         PrimeFaces.current().ajax().addCallbackParam("showDtdtsDialog", showDtdtsDialog);
     }
 
+    /**
+     * Validates DTDTS modal inputs, compiles/generates the report PDF,
+     * and displays the main DTDTS filter section if successful.
+     */
     public void continueDtdts() {
         FacesContext context = FacesContext.getCurrentInstance();
 
@@ -83,13 +93,16 @@ public class TicketReportBean implements Serializable {
             return;
         }
 
-        // I-generate na agad ang report para handa na sa fileDownload component
         generateReportInternal();
 
         showDtdtsFilters = true;
         PrimeFaces.current().ajax().addCallbackParam("validationFailed", false);
     }
 
+    /**
+     * Validates DDSOA modal inputs, compiles/generates the report PDF,
+     * and displays the main DDSOA filter section if successful.
+     */
     public void continueDdsOa() {
         FacesContext context = FacesContext.getCurrentInstance();
 
@@ -107,14 +120,16 @@ public class TicketReportBean implements Serializable {
             return;
         }
 
-        // I-generate na agad ang report para handa na sa fileDownload component
         generateDdsOaReportInternal();
 
         showDdsOaFilters = true;
         PrimeFaces.current().ajax().addCallbackParam("validationFailed", false);
     }
 
-    // Helper method para sa DDSOA generation logic
+    /**
+     * Internal helper method to build parameters, fetch template,
+     * and generate the DDSOA PDF report stream.
+     */
     private void generateDdsOaReportInternal() {
         try {
             Map<String, Object> parameters = new HashMap<>();
@@ -149,7 +164,10 @@ public class TicketReportBean implements Serializable {
         }
     }
 
-    // Helper method para sa DTDTS generation logic
+    /**
+     * Internal helper method to build parameters, fetch template,
+     * and generate the DTDTS PDF report stream.
+     */
     private void generateReportInternal() {
         try {
             Map<String, Object> parameters = new HashMap<>();
@@ -186,15 +204,23 @@ public class TicketReportBean implements Serializable {
         }
     }
 
-    // Legacy action methods kung sakaling direktang tinatawag sa XHTML
+    /**
+     * Legacy action method for direct execution of DDSOA generation from XHTML.
+     */
     public void generateDdsOaReport() {
         generateDdsOaReportInternal();
     }
 
+    /**
+     * Legacy action method for direct execution of DTDTS generation from XHTML.
+     */
     public void generateReport() {
         generateReportInternal();
     }
 
+    /**
+     * Resets all DTDTS input fields.
+     */
     public void clearDtdtsFilters() {
         glAccountCode = null;
         analysisCode = null;
@@ -202,6 +228,9 @@ public class TicketReportBean implements Serializable {
         accountNoTo = null;
     }
 
+    /**
+     * Resets all DDSOA input fields.
+     */
     public void clearDdsOaFilters() {
         ticketNoFrom = null;
         ticketNoTo = null;
