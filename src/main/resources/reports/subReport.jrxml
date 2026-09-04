@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subReport" language="groovy" pageWidth="802" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="08e381e4-bd41-43c2-9277-548140ad2a25">
+	<parameter name="PARAM_TICKET_NO" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT GL_ACCOUNT_CODE, GL_ACCOUNT_DESCRIPTION, ANALYSIS_CODE, ANALYSIS_DESCRIPTION, DEBIT, CREDIT FROM YOUR_DETAIL_TABLE WHERE TICKET_NO = $P{PARAM_TICKET_NO}]]>
+	</queryString>
+	<field name="GL_ACCOUNT_CODE" class="java.lang.String"/>
+	<field name="GL_ACCOUNT_DESCRIPTION" class="java.lang.String"/>
+	<field name="ANALYSIS_CODE" class="java.lang.String"/>
+	<field name="ANALYSIS_DESCRIPTION" class="java.lang.String"/>
+	<field name="DEBIT" class="java.math.BigDecimal"/>
+	<field name="CREDIT" class="java.math.BigDecimal"/>
+	<variable name="SUB_TOTAL_DEBIT" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{DEBIT}]]></variableExpression>
+	</variable>
+	<variable name="SUB_TOTAL_CREDIT" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{CREDIT}]]></variableExpression>
+	</variable>
+	<columnHeader>
+		<band height="40" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="0" width="802" height="1" uuid="e9264119-da33-4ec9-b194-bdb32e29e725"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="5" width="400" height="15" uuid="f5999091-f973-4b49-97f0-a535822c8d92"/>
+				<text><![CDATA[GL Account Code and Description]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="20" width="400" height="15" uuid="f1e28d10-7f70-430e-bfc6-76a07e847db4"/>
+				<text><![CDATA[Analysis Code and Description]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="445" y="10" width="125" height="15" uuid="71bebd10-15a4-4fce-88be-ea6754ae9661"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DEBIT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="630" y="10" width="100" height="15" uuid="d2ca6861-c88b-4791-844e-199be36d95b8"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CREDIT]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="35" width="802" height="1" uuid="d305c3da-3c2b-4a16-ae10-9ebeca1311d8"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="39" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="35" width="802" height="1" uuid="41b65b05-05ad-4423-b42e-97788890c721"/>
+			</line>
+			<textField>
+				<reportElement x="12" y="0" width="100" height="15" uuid="7f84a216-7186-4e7d-8b81-398d10fd0fe9"/>
+				<textFieldExpression><![CDATA[$F{GL_ACCOUNT_CODE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="12" y="15" width="100" height="15" uuid="56ff47e7-b560-40a9-bd0e-1c23da433744"/>
+				<textFieldExpression><![CDATA[$F{ANALYSIS_CODE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="127" y="0" width="218" height="15" uuid="0f76606e-bc7e-4a2d-becf-56e73f16cac6"/>
+				<textFieldExpression><![CDATA[$F{GL_ACCOUNT_DESCRIPTION}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="127" y="15" width="218" height="15" uuid="8fe7778a-12c9-4c22-bcd5-222f4d33cd3f"/>
+				<textFieldExpression><![CDATA[$F{ANALYSIS_DESCRIPTION}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="445" y="5" width="125" height="15" uuid="bac729be-fbed-4d62-a006-961ea523b73f"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{DEBIT}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="630" y="5" width="100" height="15" uuid="ceb1e3fb-6bc1-4a55-bf88-6811e1134822"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{CREDIT}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement x="445" y="0" width="55" height="20" uuid="d59043a7-b78e-49de-ae23-4d0869840605"/>
+				<textElement><font isBold="true"/></textElement>
+				<text><![CDATA[TOTAL]]></text>
+			</staticText>
+			<line>
+				<reportElement x="500" y="18" width="230" height="1" uuid="b98f3000-45a5-470d-9345-153e9fd86339"/>
+			</line>
+			<line>
+				<reportElement x="500" y="21" width="230" height="1" uuid="1eab4391-dd27-43c1-81b2-80c9cd1025b7"/>
+			</line>
+			<textField pattern="#,##0.00">
+				<reportElement x="500" y="3" width="70" height="15" uuid="7da583d2-f13a-43e3-8750-fe738e4e9a21"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{SUB_TOTAL_DEBIT}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="630" y="3" width="100" height="15" uuid="dbeb0007-2496-4306-96cc-bc3c87b50de6"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{SUB_TOTAL_CREDIT}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

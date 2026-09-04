@@ -46,10 +46,6 @@ public class TicketReportBean implements Serializable {
     // StreamedContent object used for PrimeFaces file download component
     private StreamedContent file;
 
-    /**
-     * Handles the initial selection of the report type and determines
-     * which modal dialog should be displayed via PrimeFaces callback parameters.
-     */
     public void proceed() {
         showDtdtsFilters = false;
         showDdsOaFilters = false;
@@ -72,10 +68,6 @@ public class TicketReportBean implements Serializable {
         PrimeFaces.current().ajax().addCallbackParam("showDtdtsDialog", showDtdtsDialog);
     }
 
-    /**
-     * Validates DTDTS modal inputs, compiles/generates the report PDF,
-     * and displays the main DTDTS filter section if successful.
-     */
     public void continueDtdts() {
         FacesContext context = FacesContext.getCurrentInstance();
 
@@ -99,10 +91,6 @@ public class TicketReportBean implements Serializable {
         PrimeFaces.current().ajax().addCallbackParam("validationFailed", false);
     }
 
-    /**
-     * Validates DDSOA modal inputs, compiles/generates the report PDF,
-     * and displays the main DDSOA filter section if successful.
-     */
     public void continueDdsOa() {
         FacesContext context = FacesContext.getCurrentInstance();
 
@@ -126,35 +114,13 @@ public class TicketReportBean implements Serializable {
         PrimeFaces.current().ajax().addCallbackParam("validationFailed", false);
     }
 
-    /**
-     * Internal helper method to build parameters, fetch template,
-     * and generate the DDSOA PDF report stream.
-     */
     private void generateDdsOaReportInternal() {
         try {
             Map<String, Object> parameters = new HashMap<>();
             parameters.put("TICKET_FROM", ticketNoFrom);
             parameters.put("TICKET_TO", ticketNoTo);
 
-            InputStream reportStream = getClass().getResourceAsStream("/reports/Ticket.jasper");
-
-            if (reportStream == null) {
-                reportStream = getClass().getResourceAsStream("/reports/Ticket.jrxml");
-            }
-
-            if (reportStream == null) {
-                throw new RuntimeException(
-                        "Report file 'Ticket.jasper' or 'Ticket.jrxml' not found in src/main/resources/reports/");
-            }
-
-            JasperPrint jasperPrint = ticketReportDao.generateBankSummaryReport(reportStream, parameters);
-            byte[] pdfBytes = JasperExportManager.exportReportToPdf(jasperPrint);
-
-            file = DefaultStreamedContent.builder()
-                    .name("DDSOA_Report.pdf")
-                    .contentType("application/pdf")
-                    .stream(() -> new ByteArrayInputStream(pdfBytes))
-                    .build();
+            loadAndProcessReport(parameters, "Testing.pdf");
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -164,10 +130,6 @@ public class TicketReportBean implements Serializable {
         }
     }
 
-    /**
-     * Internal helper method to build parameters, fetch template,
-     * and generate the DTDTS PDF report stream.
-     */
     private void generateReportInternal() {
         try {
             Map<String, Object> parameters = new HashMap<>();
@@ -176,25 +138,7 @@ public class TicketReportBean implements Serializable {
             parameters.put("ACC_FROM", accountNoFrom);
             parameters.put("ACC_TO", accountNoTo);
 
-            InputStream reportStream = getClass().getResourceAsStream("/reports/Ticket.jasper");
-
-            if (reportStream == null) {
-                reportStream = getClass().getResourceAsStream("/reports/Ticket.jrxml");
-            }
-
-            if (reportStream == null) {
-                throw new RuntimeException(
-                        "Report file 'Ticket.jasper' or 'Ticket.jrxml' not found in src/main/resources/reports/");
-            }
-
-            JasperPrint jasperPrint = ticketReportDao.generateBankSummaryReport(reportStream, parameters);
-            byte[] pdfBytes = JasperExportManager.exportReportToPdf(jasperPrint);
-
-            file = DefaultStreamedContent.builder()
-                    .name("ticket.pdf")
-                    .contentType("application/pdf")
-                    .stream(() -> new ByteArrayInputStream(pdfBytes))
-                    .build();
+            loadAndProcessReport(parameters, "Testing.pdf");
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -204,23 +148,37 @@ public class TicketReportBean implements Serializable {
         }
     }
 
-    /**
-     * Legacy action method for direct execution of DDSOA generation from XHTML.
-     */
+    private void loadAndProcessReport(Map<String, Object> parameters, String outputFilename) throws Exception {
+        System.out.println("TRACKING: Parameters map keys mapped: " + parameters.keySet());
+
+        // Load Testing report template
+        InputStream reportStream = getClass().getResourceAsStream("/reports/Testing.jasper");
+        if (reportStream == null) {
+            reportStream = getClass().getResourceAsStream("/reports/Testing.jrxml");
+        }
+
+        if (reportStream == null) {
+            throw new RuntimeException("Report file 'Testing.jasper' or 'Testing.jrxml' not found in src/main/resources/reports/");
+        }
+
+        JasperPrint jasperPrint = ticketReportDao.generateBankSummaryReport(reportStream, parameters);
+        byte[] pdfBytes = JasperExportManager.exportReportToPdf(jasperPrint);
+
+        file = DefaultStreamedContent.builder()
+                .name(outputFilename)
+                .contentType("application/pdf")
+                .stream(() -> new ByteArrayInputStream(pdfBytes))
+                .build();
+    }
+
     public void generateDdsOaReport() {
         generateDdsOaReportInternal();
     }
 
-    /**
-     * Legacy action method for direct execution of DTDTS generation from XHTML.
-     */
     public void generateReport() {
         generateReportInternal();
     }
 
-    /**
-     * Resets all DTDTS input fields.
-     */
     public void clearDtdtsFilters() {
         glAccountCode = null;
         analysisCode = null;
@@ -228,9 +186,6 @@ public class TicketReportBean implements Serializable {
         accountNoTo = null;
     }
 
-    /**
-     * Resets all DDSOA input fields.
-     */
     public void clearDdsOaFilters() {
         ticketNoFrom = null;
         ticketNoTo = null;

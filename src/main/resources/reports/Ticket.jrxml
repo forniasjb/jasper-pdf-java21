@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Tickets" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="822" leftMargin="10" rightMargin="10" topMargin="10" bottomMargin="10" uuid="99cedca6-cc3b-4a16-85d2-25f97ee24bbf">
-	<property name="ireport.zoom" value="1.331000000000002"/>
+	<property name="ireport.zoom" value="1.771561000000003"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="TICKET_FROM" class="java.lang.String"/>
@@ -86,7 +86,7 @@
 			<textField>
 				<reportElement x="210" y="70" width="100" height="15" uuid="0576e049-1dca-47e7-99d5-448f58a3895f"/>
 				<textElement textAlignment="Left"/>
-				<textFieldExpression><![CDATA[$F{RC_CODE}.toLowerCase()]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{RC_CODE}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="210" y="85" width="100" height="15" uuid="a87d20c6-87f4-472b-b6d1-726d3d4764d2"/>
@@ -201,7 +201,7 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="105" splitType="Stretch">
+		<band height="36" splitType="Stretch">
 			<textField>
 				<reportElement x="12" y="0" width="100" height="15" uuid="7f84a216-7186-4e7d-8b81-398d10fd0fe9"/>
 				<textFieldExpression><![CDATA[$F{GL_ACCOUNT_CODE}]]></textFieldExpression>
@@ -231,57 +231,54 @@
 			<line>
 				<reportElement x="0" y="34" width="822" height="1" uuid="41b65b05-05ad-4423-b42e-97788890c721"/>
 			</line>
-			<line>
-				<reportElement x="0" y="37" width="822" height="1" uuid="1c031f2e-1be5-4bf2-9c49-b52efea5707f"/>
-			</line>
-			<staticText>
-				<reportElement x="400" y="41" width="45" height="15" uuid="d59043a7-b78e-49de-ae23-4d0869840605"/>
-				<textElement verticalAlignment="Middle">
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[TOTAL]]></text>
-			</staticText>
-			<textField pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement x="445" y="41" width="125" height="15" uuid="7da583d2-f13a-43e3-8750-fe738e4e9a21"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$V{TOTAL_DEBIT}]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement x="630" y="41" width="100" height="15" uuid="dbeb0007-2496-4306-96cc-bc3c87b50de6"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$V{TOTAL_CREDIT}]]></textFieldExpression>
-			</textField>
-			<line>
-				<reportElement x="445" y="58" width="285" height="1" uuid="b98f3000-45a5-470d-9345-153e9fd86339"/>
-			</line>
-			<line>
-				<reportElement x="445" y="61" width="285" height="1" uuid="1eab4391-dd27-43c1-81b2-80c9cd1025b7"/>
-			</line>
-			<staticText>
-				<reportElement x="12" y="75" width="100" height="20" uuid="591330e0-8d1c-47a8-ab3b-b9b670283b86"/>
-				<textElement textAlignment="Left" verticalAlignment="Middle"/>
-				<text><![CDATA[Particulars]]></text>
-			</staticText>
-			<rectangle>
-				<reportElement x="127" y="67" width="693" height="30" uuid="f38e55fd-db5a-4630-b1ce-08d916a50399"/>
-			</rectangle>
-			<textField isBlankWhenNull="true">
-				<reportElement x="132" y="70" width="678" height="24" uuid="faad8263-5a38-45fe-bb57-c7edc9254806"/>
-				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{PARTICULARS}]]></textFieldExpression>
-			</textField>
 		</band>
 	</detail>
-	<pageFooter>
-		<band height="23">
+	<summary>
+		<band height="120">
 			<staticText>
-				<reportElement x="0" y="0" width="157" height="21" uuid="3fb9968d-a1ff-4a3d-94c2-2d36486cfdec"/>
+				<reportElement x="0" y="99" width="157" height="21" uuid="3fb9968d-a1ff-4a3d-94c2-2d36486cfdec"/>
 				<textElement>
 					<font size="8" isItalic="true"/>
 				</textElement>
 				<text><![CDATA[This is a system-generated report and
 does not require a signature.]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="7" y="60" width="100" height="20" uuid="591330e0-8d1c-47a8-ab3b-b9b670283b86"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<text><![CDATA[Particulars]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="112" y="50" width="708" height="30" uuid="f38e55fd-db5a-4630-b1ce-08d916a50399"/>
+			</rectangle>
+			<textField isBlankWhenNull="true">
+				<reportElement x="112" y="53" width="690" height="24" uuid="faad8263-5a38-45fe-bb57-c7edc9254806"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{PARTICULARS}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="400" y="0" width="45" height="15" uuid="d59043a7-b78e-49de-ae23-4d0869840605"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL]]></text>
+			</staticText>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="445" y="0" width="125" height="15" uuid="7da583d2-f13a-43e3-8750-fe738e4e9a21"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{TOTAL_DEBIT}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="630" y="0" width="100" height="15" uuid="dbeb0007-2496-4306-96cc-bc3c87b50de6"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{TOTAL_CREDIT}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="445" y="17" width="285" height="1" uuid="b98f3000-45a5-470d-9345-153e9fd86339"/>
+			</line>
+			<line>
+				<reportElement x="445" y="20" width="285" height="1" uuid="1eab4391-dd27-43c1-81b2-80c9cd1025b7"/>
+			</line>
 		</band>
-	</pageFooter>
+	</summary>
 </jasperReport>
